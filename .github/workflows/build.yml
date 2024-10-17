@@ -1,0 +1,36 @@
+name: itemshopsys pipeline
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Java 8
+        uses: actions/setup-java@v3
+        with:
+          java-version: 8
+          distribution: 'temurin'
+          cache: 'gradle'
+      - name: Setup Git
+        run: |
+          git config --global user.email "ci@github.com"
+          git config --global user.name "itemshopsys pipeline"
+          git config --global init.defaultBranch master
+      - name: Grant execute permissions
+        run: |
+          chmod +x gradlew
+      - name: Build itemshopsys plugin
+        run: ./gradlew shadowJar --no-daemon
+      - name: Upload itemshopsys plugin
+        uses: actions/upload-artifact@v3
+        with:
+          name: Plugin JAR
+          path: itemshopsys-all/build/libs/itemshopsys v*.jar
+          if-no-files-found: error
