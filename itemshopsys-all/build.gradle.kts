@@ -18,7 +18,10 @@ tasks.assemble {
 tasks.withType<ShadowJar> {
     archiveFileName.set("itemshopsys v${project.version}.jar")
     relocate("kong.unirest", "dev.shiza.itemshopsys.libs.kong.unirest")
-    relocate("com.google.gson", "dev.shiza.itemshopsys.libs.com.google.gson")
+    relocate("com.google", "dev.shiza.itemshopsys.libs.com.google")
+    relocate("eu.okaeri", "dev.shiza.itemshopsys.libs.eu.okaeri")
+    relocate("org.yaml", "dev.shiza.itemshopsys.libs.org.yaml")
+    relocate("org.apache", "dev.shiza.itemshopsys.libs.org.apache")
 }
 
 sourceSets {
