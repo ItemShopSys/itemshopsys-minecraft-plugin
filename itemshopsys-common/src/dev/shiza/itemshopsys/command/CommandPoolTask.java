@@ -1,9 +1,9 @@
 package dev.shiza.itemshopsys.command;
 
+import dev.shiza.itemshopsys.ItemShopLogger;
 import dev.shiza.itemshopsys.client.ItemShopClient;
 import dev.shiza.itemshopsys.client.ItemShopClientConfig;
 import dev.shiza.itemshopsys.client.command.ExecutableCommand;
-import dev.shiza.itemshopsys.ItemShopLogger;
 import dev.shiza.itemshopsys.player.PlayerAccessor;
 import java.util.List;
 
@@ -33,10 +33,7 @@ public final class CommandPoolTask implements Runnable {
     final List<ExecutableCommand> executableCommands =
         client.retrieveCommands(config.shopId, config.serverId).getCommands();
     if (executableCommands.isEmpty()) {
-      if (config.debug) {
-        logger.debug("No commands to execute were retrieved.");
-      }
-
+      logger.debug("No commands to execute were retrieved.");
       return;
     }
 
@@ -45,27 +42,23 @@ public final class CommandPoolTask implements Runnable {
 
   private void processCommand(final ExecutableCommand executableCommand) {
     if (isCommandUnavailable(executableCommand)) {
-      if (config.debug) {
-        logger.debug(
-            String.format(
-                "Command %s (%s) could not be executed, because %s is Offline.",
-                executableCommand.getUniqueId(),
-                executableCommand.getCommand(),
-                executableCommand.getPlayerName()));
-      }
+      logger.debug(
+          String.format(
+              "Command %s (%s) could not be executed, because %s is Offline.",
+              executableCommand.getUniqueId(),
+              executableCommand.getCommand(),
+              executableCommand.getPlayerName()));
 
       client.restoreCommand(config.shopId, config.serverId, executableCommand.getUniqueId());
       return;
     }
 
-    if (config.debug) {
-      logger.debug(
-          String.format(
-              "Executing command %s (%s) for %s.",
-              executableCommand.getUniqueId(),
-              executableCommand.getCommand(),
-              executableCommand.getPlayerName()));
-    }
+    logger.debug(
+        String.format(
+            "Executing command %s (%s) for %s.",
+            executableCommand.getUniqueId(),
+            executableCommand.getCommand(),
+            executableCommand.getPlayerName()));
 
     commandDispatcher.dispatchCommand(executableCommand.getCommand());
   }

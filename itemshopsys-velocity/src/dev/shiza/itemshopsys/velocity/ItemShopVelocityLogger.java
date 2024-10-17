@@ -13,11 +13,11 @@ public class ItemShopVelocityLogger implements ItemShopLogger {
 
   @Override
   public void debug(final String message) {
-    logger.log(Level.INFO, message);
+    logger.log(Level.INFO, "[itemshopsys] " + message);
   }
 
   @Override
   public void error(final String message) {
-    logger.log(Level.SEVERE, message);
+    logger.log(Level.SEVERE, "[itemshopsys] " + message);
   }
 }

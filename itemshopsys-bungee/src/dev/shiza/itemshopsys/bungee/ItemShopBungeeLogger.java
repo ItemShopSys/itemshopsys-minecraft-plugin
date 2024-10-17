@@ -14,11 +14,11 @@ public final class ItemShopBungeeLogger implements ItemShopLogger {
 
   @Override
   public void debug(final String message) {
-    server.getLogger().log(Level.INFO, message);
+    server.getLogger().log(Level.INFO, "[itemshopsys] " + message);
   }
 
   @Override
   public void error(final String message) {
-    server.getLogger().log(Level.SEVERE, message);
+    server.getLogger().log(Level.SEVERE, "[itemshopsys] " + message);
   }
 }
