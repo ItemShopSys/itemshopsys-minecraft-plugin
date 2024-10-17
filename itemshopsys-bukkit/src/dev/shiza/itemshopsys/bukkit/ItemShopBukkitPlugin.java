@@ -24,7 +24,7 @@ public final class ItemShopBukkitPlugin extends JavaPlugin implements PlatformDa
             new ConfigFactory(getDataFolder().toPath(), YamlBukkitConfigurer::new),
             new BukkitTaskScheduler(this),
             new BukkitPlayerAccessor(getServer()),
-            new BukkitCommandDispatcher(getServer()));
+            new BukkitCommandDispatcher(this));
     itemShopPlugin.onEnable();
 
     Objects.requireNonNull(getCommand("itemshopsys"))
