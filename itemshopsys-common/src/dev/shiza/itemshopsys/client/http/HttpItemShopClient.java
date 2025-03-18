@@ -45,6 +45,11 @@ final class HttpItemShopClient implements ItemShopClient {
             .routeParam("shopId", shopId)
             .routeParam("serverId", serverId)
             .asObject(ExecutableCommands.class);
+
+    if (response.getStatus() == 200) {
+      return response.getBody();
+    }
+
     switch (response.getStatus()) {
       case 429:
         logger.debug("Rate limit exceeded, commands could not be retrieved.");
@@ -52,10 +57,16 @@ final class HttpItemShopClient implements ItemShopClient {
       case 503:
         logger.debug("Service unavailable, commands could not be retrieved.");
         return EMPTY_COMMANDS;
+      case 400:
+        logger.debug("Server token is invalid or is empty, commands could not be retrieved.");
+        return EMPTY_COMMANDS;
+      case 404:
+        logger.debug("Invalid shop or server parameters, commands could not be retrieved. Make sure that you have passed them correctly.");
+        return EMPTY_COMMANDS;
       default:
-        break;
+        logger.debug("Received unknown HTTP status from ItemShopSys API during commands fetching. Received status code: " + response.getStatus());
+        return EMPTY_COMMANDS;
     }
-    return response.getBody();
   }
 
   @Override

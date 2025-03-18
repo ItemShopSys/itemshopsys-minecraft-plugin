@@ -10,7 +10,7 @@ dependencies {
 }
 
 bungee {
-    main = "dev.shiza.itemshopsys.bukkit.ItemShopBungeePlugin"
+    main = "dev.shiza.itemshopsys.bungee.ItemShopBungeePlugin"
     name = "itemshopsys"
     version = project.version.toString()
     author = "shiza"
