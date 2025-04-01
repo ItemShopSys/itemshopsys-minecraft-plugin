@@ -8,7 +8,7 @@ allprojects {
     apply(plugin = "com.gradleup.shadow")
 
     group = "dev.shiza"
-    version = "1.0.1"
+    version = "1.0.2"
 
     repositories {
         mavenCentral()
