@@ -8,7 +8,7 @@ allprojects {
     apply(plugin = "com.gradleup.shadow")
 
     group = "dev.shiza"
-    version = "1.0.2"
+    version = "1.0.3"
 
     repositories {
         mavenCentral()
@@ -24,6 +24,10 @@ allprojects {
     }
 
     java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(8))
+        }
+
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }

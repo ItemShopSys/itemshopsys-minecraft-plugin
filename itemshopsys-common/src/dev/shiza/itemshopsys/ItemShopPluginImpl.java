@@ -41,6 +41,8 @@ final class ItemShopPluginImpl implements ItemShopPlugin {
   @Override
   public void onEnable() {
     config = configFactory.produceConfig(ItemShopClientConfig.class, "config.yml");
+    logger.setDebugEnabled(config.debug);
+
     if (requiresConfiguration()) {
       logger.error("You need to configure the plugin before using it.");
       return;
