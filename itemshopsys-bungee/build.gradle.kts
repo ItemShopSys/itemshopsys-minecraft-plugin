@@ -6,7 +6,7 @@ plugins {
 dependencies {
     implementation(project(":itemshopsys-common"))
     implementation("eu.okaeri:okaeri-configs-yaml-bungee:5.0.5")
-    compileOnly("net.md-5:bungeecord-api:26.1-R0.1-SNAPSHOT")
+    compileOnly("net.md-5:bungeecord-api:1.16-R0.4")
 }
 
 bungee {
